@@ -58,7 +58,7 @@ export default class DeckList extends Component {
                         data={this.state.decks}
                         renderItem={({item}) => <DeckItem deck={item} navigate={navigate}/> }
                         keyExtractor={item => item.title}
-                        ListHeaderComponent={this.renderHeader}
+                        // ListHeaderComponent={this.renderHeader}
                     />
                 }
             </View>
@@ -91,5 +91,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginLeft: 10,
         marginRight: 10,
+        borderWidth: 1
     }
 });
