@@ -44,8 +44,6 @@ export default class DeckList extends Component {
 
             this.setState({decks: deckArray})
         }).catch(err => console.log(err));
-
-
     }
 
     render() {
