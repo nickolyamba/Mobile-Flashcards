@@ -24,14 +24,14 @@ export default class AddCard extends Component {
                            onChangeText={question => this.setState({question})}
                            placeholder = 'Enter Question'
                            multiline={true}
-                           numberOfLines = {2}/>
+                           numberOfLines = {2} />
 
                 <TextInput value={this.state.answer} style={styles.textInput}
                            autogrow={true}
                            onChangeText={answer => this.setState({answer})}
                            placeholder = 'Enter Answer'
                            multiline={true}
-                           numberOfLines = {2}/>
+                           numberOfLines = {2} />
                 
                 <TouchableOpacity style={styles.button} onPress={() => this.createCard(deck, goBack)}>
                     <Text style={styles.buttonText}>
