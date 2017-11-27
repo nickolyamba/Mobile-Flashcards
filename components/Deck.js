@@ -14,6 +14,8 @@ export default class Deck extends Component {
 
     render() {
         const { deck } = this.props.navigation.state.params;
+        const { navigate } = this.props.navigation;
+
         return (
             <View style={styles.container}>
                 <View>
@@ -26,7 +28,8 @@ export default class Deck extends Component {
                 </View>
 
                 <View>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigate('AddCard',
+                        { deck })}>
                         <Text style={styles.buttonText}>
                             Add Card
                         </Text>
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     largeText: {
-        fontSize: 30,
+        fontSize: 25,
         textAlign: 'center',
     },
     smallText: {
