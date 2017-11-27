@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity, TextInput,
          KeyboardAvoidingView } from 'react-native';
 import { blue, white } from '../utils/colors'
+import { saveDeckTitle } from '../utils/storage';
 
 export default class AddDeck extends Component {
     state = {deckInput: ''};
+
+    createDeck = () => {
+        saveDeckTitle(this.state.deckInput);
+    };
 
     render() {
         return (
@@ -13,7 +18,7 @@ export default class AddDeck extends Component {
                 <TextInput value={this.state.deckInput} style={styles.textInput}
                            autogrow={true}
                            onChangeText={deckInput => this.setState({deckInput})}/>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => this.createDeck()}>
                     <Text style={styles.buttonText}>
                         Add Deck
                     </Text>
