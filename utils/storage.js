@@ -53,8 +53,8 @@ const saveDeckTitle = (title) => {
  *  and will add the card to the list of
  *  questions for the deck with
  *  the associated title.
- * @param title
- * @param card
+ * @param title{string}
+ * @param card{object}
  */
 const addCardToDeck = async(title, card) => {
     try{

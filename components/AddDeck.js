@@ -8,6 +8,8 @@ export default class AddDeck extends Component {
     state = {deckInput: ''};
 
     createDeck = () => {
+        // Pressing the button correctly creates the deck and
+        // routes the user to the Individual Deck view for the new deck.
         saveDeckTitle(this.state.deckInput);
     };
 
