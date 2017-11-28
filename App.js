@@ -6,29 +6,19 @@ import { StackNavigator, TabNavigator } from 'react-navigation'
 import DeckList from './components/DeckList';
 import Deck from './components/Deck';
 import AddDeck from './components/AddDeck';
+import AddCard from './components/AddCard';
+import Quiz from './components/Quiz';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './reducers'
+import devTools from 'remote-redux-devtools';
+import { compose } from 'redux'
 
 
-const MainNavigator = StackNavigator({
-    Home: {
-        screen: DeckList,
-        navigationOptions: {
-            header: null
-        },
-    },
-    Deck: {
-        screen: Deck,
-        navigationOptions: {
-            headerTintColor: blue,
-            headerStyle: {
-                backgroundColor: white,
-            }
-        }
-    }
-});
 
 const Tab = TabNavigator({
-        MainNavigator: {
-            screen: MainNavigator,
+        Home: {
+            screen: DeckList,
             navigationOptions: {
                 tabBarLabel: 'Decks',
                 tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
@@ -70,14 +60,93 @@ const Tab = TabNavigator({
     }
 );
 
+const MainNavigator = StackNavigator({
+    Home: {
+        screen: Tab,
+        navigationOptions: {
+            header: null
+        },
+    },
+
+    Deck: {
+        screen: Deck,
+        navigationOptions: {
+            headerTintColor: blue,
+            headerStyle: {
+                backgroundColor: white,
+            }
+        }
+    },
+
+    AddCard: {
+        screen: AddCard,
+        navigationOptions: {
+            title: 'Add Card',
+            headerTintColor: blue,
+            headerStyle: {
+                backgroundColor: white,
+            }
+        }
+    },
+
+    Quiz: {
+        screen: Quiz,
+        navigationOptions: {
+            title: 'Quiz',
+            headerTintColor: blue,
+            headerStyle: {
+                backgroundColor: white,
+            }
+        }
+    }
+
+
+});
+
+// source: https://reactnavigation.org/docs/guides/screen-tracking
+// gets the current screen from navigation state
+function getCurrentRouteName(navigationState) {
+    if (!navigationState) {
+        return null;
+    }
+    const route = navigationState.routes[navigationState.index];
+    // dive into nested navigators
+    if (route.routes) {
+        return getCurrentRouteName(route);
+    }
+    return route.routeName;
+}
+
 export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-          <Tab />
-      </View>
-    );
-  }
+    render() {
+        const enhancer = compose(
+            //applyMiddleware(thunk),
+            devTools({
+                name: Platform.OS,
+                hostname: 'http://192.168.1.118',
+                port: 19000
+            })
+        );
+        const store = createStore(reducer);
+
+        console.log(store.getState());
+
+        return (
+            <Provider store={store}>
+              <View style={styles.container}>
+                  <MainNavigator
+                      onNavigationStateChange={(prevState, currentState) => {
+                          const currentScreen = getCurrentRouteName(currentState);
+                          const prevScreen = getCurrentRouteName(prevState);
+
+                          //if(currentScreen === 'DeckList')
+                          console.log('currentScreen: ', currentScreen);
+                      }}
+                  />
+              </View>
+            </Provider>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
