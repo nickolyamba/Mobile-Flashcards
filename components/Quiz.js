@@ -4,7 +4,7 @@ import { purple, white } from '../utils/colors'
 
 
 
-export default class Deck extends Component {
+export default class Quiz extends Component {
     static navigationOptions = ({ navigation }) => {
         const { deck } = navigation.state.params;
         return {
@@ -34,15 +34,13 @@ export default class Deck extends Component {
                             Add Card
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => navigate('Quiz',
-                        { deck })} >
+                    <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>
                             Start Quiz
                         </Text>
                     </TouchableOpacity>
 
                 </View>
-
             </View>
         );
     }
