@@ -119,15 +119,8 @@ function getCurrentRouteName(navigationState) {
 
 export default class App extends Component {
     render() {
-        const enhancer = compose(
-            //applyMiddleware(thunk),
-            devTools({
-                name: Platform.OS,
-                hostname: 'http://192.168.1.118',
-                port: 19000
-            })
-        );
-        const store = createStore(reducer);
+        const initState = {quiz: {cardIdx: 0, isLast: false, correctCount: 0, incorrectCount: 0}};
+        const store = createStore(reducer, initState);
 
         console.log(store.getState());
 
