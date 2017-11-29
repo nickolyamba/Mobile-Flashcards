@@ -1,18 +1,28 @@
 import { combineReducers } from 'redux'
-import { NEXT_CARD } from '../actions'
+import { NEXT_CARD, RESET_QUIZ } from '../actions'
 
-function activeCard (state = {}, action) {
-    switch (action.type) {
-        case NEXT_CARD :
+function quiz (state = {}, action) {
+    const {type, cardIdx, isCorrect} = action;
+    switch (type) {
+        case NEXT_CARD:
+            const increment = isCorrect ? 1 : 0;
             return {
                 ...state,
-                ...action.cardIdx,
+                    cardIdx,
+                    correctCount: state.correctCount + increment
             };
+
+        case RESET_QUIZ:
+            return {
+                cardIdx: 0,
+                correctCount: 0
+            };
+
         default :
             return state
     }
 }
 
 export default combineReducers({
-    activeCard
+    quiz
 });
