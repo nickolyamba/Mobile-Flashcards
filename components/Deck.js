@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { purple, white } from '../utils/colors';
+import { purple, white, blue } from '../utils/colors';
 import { connect } from "react-redux";
 import { resetQuiz } from "../actions/index";
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     button: {
         paddingHorizontal: 60,
         paddingVertical: 20,
-        backgroundColor: purple,
+        backgroundColor: blue,
         alignSelf: 'center',
         borderRadius: 5,
         marginVertical: 10,

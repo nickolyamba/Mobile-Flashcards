@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
-import { white, gray } from '../utils/colors'
+import { white, gray, blue, lightPurp } from '../utils/colors'
 import { connect } from "react-redux";
 import { initDecks } from "../actions";
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     buttonLargeText: {
         color: white,
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 25,
         textAlign: 'center',
     },
     buttonSmallText: {
@@ -69,11 +69,8 @@ const styles = StyleSheet.create({
     card: {
         flex: 1,
         paddingVertical: 20,
-        backgroundColor: 'rgba(2, 179, 228, 1.0)',
-        borderRadius: 5,
-        marginBottom: 10,
-        marginLeft: 10,
-        marginRight: 10,
+        backgroundColor: gray,//'rgba(2, 179, 228, 1.0)',
+        marginBottom: 5,
         borderWidth: 1
     },
     smallText: {
@@ -84,6 +81,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({decks}) => {
+    console.log({decks});
     if(!Object.keys(decks))
         return{
             decks: []

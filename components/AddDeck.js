@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity, TextInput,
          KeyboardAvoidingView, ToastAndroid } from 'react-native';
-import { blue, white } from '../utils/colors'
+import { blue, white, gray } from '../utils/colors'
 import { saveDeckTitle } from '../utils/storage';
 import { connect } from "react-redux";
 import { addDeck } from "../actions";
@@ -69,7 +69,10 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     titleText: {
-        fontSize: 30,
+        marginTop: 10,
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: gray,
         textAlign: 'center',
     },
     smallText: {

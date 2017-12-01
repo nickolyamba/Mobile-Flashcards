@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
-import { purple, white, blue } from './utils/colors'
+import { white, blue } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import DeckList from './components/DeckList';
