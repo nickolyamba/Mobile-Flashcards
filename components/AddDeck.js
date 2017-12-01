@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity, TextInput,
-         KeyboardAvoidingView } from 'react-native';
+         KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import { blue, white } from '../utils/colors'
 import { saveDeckTitle } from '../utils/storage';
+import { connect } from "react-redux";
+import { addDeck } from "../actions";
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
     state = {deckInput: ''};
 
     createDeck = () => {
         // Pressing the button correctly creates the deck and
         // routes the user to the Individual Deck view for the new deck.
-        saveDeckTitle(this.state.deckInput);
+        const {addDeck} = this.props;
+        const deck = this.state.deckInput;
+
+        saveDeckTitle(deck);
+        addDeck(deck);
+        this.setState({deckInput: ''});
+
+        ToastAndroid.showWithGravityAndOffset(`Deck ${deck} is added!`,
+            ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
     };
 
     render() {
@@ -67,3 +77,11 @@ const styles = StyleSheet.create({
         padding: 10
     }
 });
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addDeck: (deckTitle) => dispatch(addDeck(deckTitle)),
+    }
+};
+
+export default connect(null, mapDispatchToProps)(AddDeck);

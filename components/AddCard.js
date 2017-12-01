@@ -3,13 +3,21 @@ import { StyleSheet, Text, TouchableOpacity, TextInput,
          KeyboardAvoidingView } from 'react-native';
 import { blue, white } from '../utils/colors'
 import { addCardToDeck } from '../utils/storage';
+import {connect} from "react-redux";
+import {addCard} from "../actions";
 
-export default class AddCard extends Component {
+class AddCard extends Component {
     state = {question: '', answer: ''};
 
     createCard = (deck, goBack) => {
         const { question, answer } = this.state;
-        addCardToDeck(deck.title, {question, answer}).then(() => goBack())
+        const { addCard } = this.props;
+
+        addCardToDeck(deck.title, {question, answer})
+            .then(() => {
+                addCard(deck.title, {question, answer});
+                goBack();
+            })
             .catch(err => console.error(err));
     };
 
@@ -80,3 +88,11 @@ const styles = StyleSheet.create({
         padding: 10
     }
 });
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addCard: (deckTitle, card) => dispatch(addCard(deckTitle, card))
+    }
+};
+
+export default connect(null, mapDispatchToProps)(AddCard);

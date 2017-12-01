@@ -81,7 +81,6 @@ const removeCardFromDeck = async(title, card) => {
     try{
         const decks = JSON.parse(await AsyncStorage.getItem(APP_STORAGE_KEY));
         const questions = decks[title]['questions'];
-        console.log('questions: ', questions);
 
         return await AsyncStorage.setItem(APP_STORAGE_KEY, JSON.stringify({
             [title]: {

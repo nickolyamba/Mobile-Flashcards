@@ -22,7 +22,7 @@ class Quiz extends Component {
 
     render() {
         const { deck } = this.props.navigation.state.params;
-        const { navigate, goBack } = this.props.navigation;
+        const { goBack } = this.props.navigation;
         const { cardIdx, correctCount, resetQuiz } = this.props;
         const { showAnswer } = this.state;
 

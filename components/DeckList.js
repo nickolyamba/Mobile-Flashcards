@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import { purple, white } from '../utils/colors'
 import { getDecks, getDeck, saveDeckTitle, addCardToDeck, removeCardFromDeck} from '../utils/storage';
+import { connect } from "react-redux";
+import { initDecks } from "../actions";
 
 
 const DeckItem = ({deck, navigate}) => {
   return(
       <TouchableOpacity style={styles.card}
-                        onPress={() => navigate('Deck', { deck })}
+                        onPress={() => navigate('Deck', { title: deck.title })}
       >
           <Text style={styles.buttonLargeText}>
               {deck.title}
@@ -26,34 +28,28 @@ renderHeader = () => {
         </Text>);
 };
 
-export default class DeckList extends Component {
-    state = {decks: []};
+class DeckList extends Component {
+    //state = {decks: []};
 
     componentDidMount(){
-
         // saveDeckTitle('JavaScript');
         // addCardToDeck('Udacity', card).catch(err => console.error(err));
         // removeCardFromDeck('Udacity', card).catch(err => console.error(err));
-
+        const {initDecks} = this.props;
         getDecks().then(decks => {
-            const deckArray = Object.keys(decks).reduce((deckArray, deckKey)=>{
-                if(!deckArray) deckArray = [];
-                deckArray.push(decks[deckKey]);
-                return deckArray;
-            }, []);
-
-            this.setState({decks: deckArray})
+            if(decks) initDecks(decks);
         }).catch(err => console.log(err));
     }
 
     render() {
         const {navigate} = this.props.navigation;
+        const {decks} = this.props;
         return (
             <View style={styles.container}>
-                {this.state.decks &&
+                {decks &&
                     <FlatList
                         style={{flex: 1}}
-                        data={this.state.decks}
+                        data={decks}
                         renderItem={({item}) => <DeckItem deck={item} navigate={navigate}/> }
                         keyExtractor={item => item.title}
                         // ListHeaderComponent={this.renderHeader}
@@ -92,3 +88,28 @@ const styles = StyleSheet.create({
         borderWidth: 1
     }
 });
+
+const mapStateToProps = ({decks}) => {
+    if(!Object.keys(decks))
+        return{
+            decks: []
+        };
+
+    const deckArray = Object.keys(decks).reduce((deckArray, deckKey)=>{
+        if(!deckArray) deckArray = [];
+        deckArray.push(decks[deckKey]);
+        return deckArray;
+    }, []);
+
+    return {
+        decks: deckArray
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        initDecks: (decks) => dispatch(initDecks(decks)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
