@@ -1,3 +1,5 @@
+import { getDecks } from "../utils/storage";
+
 export const NEXT_CARD = 'NEXT_CARD';
 export const RESET_QUIZ = 'RESET_QUIZ';
 export const INIT_DECKS = 'INIT_DECKS';
@@ -44,3 +46,9 @@ export const addCard = (title, card) => {
         card
     }
 };
+
+export const fetchDecks = () => (dispatch) => (
+    getDecks()
+        .then(decks => dispatch(initDecks(decks)))
+        .catch(error => console.error({error}))
+);

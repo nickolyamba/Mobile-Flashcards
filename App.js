@@ -11,8 +11,9 @@ import Quiz from './components/Quiz';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducers'
-import devTools from 'remote-redux-devtools';
-import { compose } from 'redux'
+import { applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
+import { fetchDecks } from "./actions";
 
 
 
@@ -120,9 +121,11 @@ function getCurrentRouteName(navigationState) {
 export default class App extends Component {
     render() {
         const initState = {quiz: {cardIdx: 0, isLast: false, correctCount: 0, incorrectCount: 0}};
-        const store = createStore(reducer, initState);
+        const store = createStore(reducer, initState, applyMiddleware(thunk));
 
-        console.log(store.getState());
+        store.dispatch(fetchDecks());
+
+        console.log('store: ', store.getState());
 
         return (
             <Provider store={store}>

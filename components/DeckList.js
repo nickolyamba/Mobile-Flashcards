@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
-import { purple, white } from '../utils/colors'
-import { getDecks, getDeck, saveDeckTitle, addCardToDeck, removeCardFromDeck} from '../utils/storage';
+import { white } from '../utils/colors'
 import { connect } from "react-redux";
 import { initDecks } from "../actions";
 
@@ -9,8 +8,7 @@ import { initDecks } from "../actions";
 const DeckItem = ({deck, navigate}) => {
   return(
       <TouchableOpacity style={styles.card}
-                        onPress={() => navigate('Deck', { title: deck.title })}
-      >
+                        onPress={() => navigate('Deck', { title: deck.title })}>
           <Text style={styles.buttonLargeText}>
               {deck.title}
           </Text>
@@ -21,26 +19,7 @@ const DeckItem = ({deck, navigate}) => {
   )
 };
 
-renderHeader = () => {
-    return(
-        <Text style={{color: purple, fontSize: 25}}>
-            Decks
-        </Text>);
-};
-
 class DeckList extends Component {
-    //state = {decks: []};
-
-    componentDidMount(){
-        // saveDeckTitle('JavaScript');
-        // addCardToDeck('Udacity', card).catch(err => console.error(err));
-        // removeCardFromDeck('Udacity', card).catch(err => console.error(err));
-        const {initDecks} = this.props;
-        getDecks().then(decks => {
-            if(decks) initDecks(decks);
-        }).catch(err => console.log(err));
-    }
-
     render() {
         const {navigate} = this.props.navigation;
         const {decks} = this.props;
@@ -52,7 +31,6 @@ class DeckList extends Component {
                         data={decks}
                         renderItem={({item}) => <DeckItem deck={item} navigate={navigate}/> }
                         keyExtractor={item => item.title}
-                        // ListHeaderComponent={this.renderHeader}
                     />
                 }
             </View>
