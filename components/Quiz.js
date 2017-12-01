@@ -10,7 +10,7 @@ class Quiz extends Component {
     state = {showAnswer: false};
 
     getNextCard = (isCorrect) => {
-        const {updateScore, cardIdx} = this.props;
+        const { updateScore, cardIdx } = this.props;
         const { deck } = this.props.navigation.state.params;
 
         if(cardIdx < deck.questions.length){
@@ -59,13 +59,13 @@ class Quiz extends Component {
 
                     <View style={{marginBottom: 50}}>
                         <TouchableOpacity style={[styles.button, {backgroundColor: green}]}
-                                          onPress={() => this.getNextCard(cardIdx, true)}>
+                                          onPress={() => this.getNextCard(true)}>
                             <Text style={styles.buttonText}>
                                 {deck.questions[cardIdx] ? 'Correct' : ''}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.button, {backgroundColor: red}]}
-                                          onPress={() => this.getNextCard(cardIdx, false)}>
+                                          onPress={() => this.getNextCard(false)}>
                             <Text style={styles.buttonText}>
                                 Incorrect
                             </Text>
