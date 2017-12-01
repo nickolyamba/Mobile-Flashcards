@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
-import { white } from '../utils/colors'
+import { white, gray } from '../utils/colors'
 import { connect } from "react-redux";
 import { initDecks } from "../actions";
 
@@ -23,6 +23,17 @@ class DeckList extends Component {
     render() {
         const {navigate} = this.props.navigation;
         const {decks} = this.props;
+
+        if(decks && decks.length === 0){
+            return(
+                <View style={styles.container}>
+                    <Text style={styles.smallText}>
+                        {'No decks in storage\nClick right tab to add new deck'}
+                    </Text>
+                </View>
+            );
+        }
+
         return (
             <View style={styles.container}>
                 {decks &&
@@ -64,7 +75,12 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
         borderWidth: 1
-    }
+    },
+    smallText: {
+        fontSize: 20,
+        textAlign: 'center',
+        color: gray
+    },
 });
 
 const mapStateToProps = ({decks}) => {
