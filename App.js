@@ -14,6 +14,7 @@ import reducer from './reducers'
 import { applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { fetchDecks } from "./actions";
+import { setLocalNotification } from './utils/notifications'
 
 
 
@@ -119,6 +120,10 @@ function getCurrentRouteName(navigationState) {
 }
 
 export default class App extends Component {
+    componentDidMount(){
+        setLocalNotification();
+    }
+
     render() {
         const initState = {quiz: {cardIdx: 0, isLast: false, correctCount: 0, incorrectCount: 0}};
         const store = createStore(reducer, initState, applyMiddleware(thunk));

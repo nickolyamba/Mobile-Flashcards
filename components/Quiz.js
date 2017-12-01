@@ -4,8 +4,6 @@ import { purple, white, gray, blue, green, red } from '../utils/colors'
 import { connect } from 'react-redux';
 import { updateScore, resetQuiz } from '../actions/index';
 
-
-
 class Quiz extends Component {
     state = {showAnswer: false};
 
