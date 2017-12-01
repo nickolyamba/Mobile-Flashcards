@@ -18,7 +18,8 @@ class AddCard extends Component {
         addCardToDeck(deck.title, {question, answer})
             .then(() => {
                 addCard(deck.title, {question, answer});
-                ToastAndroid.showWithGravityAndOffset(`Card ${[question]} is added to ${deck.title}!`,
+                ToastAndroid.showWithGravityAndOffset(
+                    `Card '${[question]}' is added to '${deck.title}' deck!`,
                     ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
                 //goBack();
                 this.setState({question: '', answer: ''});

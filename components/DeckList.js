@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({decks}) => {
-    console.log({decks});
     if(!Object.keys(decks))
         return{
             decks: []
