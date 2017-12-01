@@ -45,7 +45,7 @@ const saveDeckTitle = (title) => {
             title,
             questions: []
         }
-    }));
+    })).catch(err => Promise.reject(err));
 };
 
 /**
@@ -71,7 +71,7 @@ const addCardToDeck = async(title, card) => {
         }));
     }
     catch (err){
-        return err;
+        return Promise.reject(err);
     }
 
 };
@@ -92,7 +92,6 @@ const removeCardFromDeck = async(title, card) => {
     catch (err){
         return err;
     }
-
 };
 
 export {getDeck, getDecks, saveDeckTitle, addCardToDeck, removeCardFromDeck}
