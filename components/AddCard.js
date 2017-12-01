@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TouchableOpacity, TextInput,
-         KeyboardAvoidingView } from 'react-native';
+import {
+    StyleSheet, Text, TouchableOpacity, TextInput,
+    KeyboardAvoidingView, ToastAndroid
+} from 'react-native';
 import { blue, white } from '../utils/colors'
 import { addCardToDeck } from '../utils/storage';
 import {connect} from "react-redux";
@@ -16,9 +18,16 @@ class AddCard extends Component {
         addCardToDeck(deck.title, {question, answer})
             .then(() => {
                 addCard(deck.title, {question, answer});
-                goBack();
+                ToastAndroid.showWithGravityAndOffset(`Card ${[question]} is added to ${deck.title}!`,
+                    ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+                //goBack();
+                this.setState({question: '', answer: ''});
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                ToastAndroid.showWithGravityAndOffset('Error during saving: Card is NOT saved!',
+                    ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+                console.error(err);
+            });
     };
 
     render() {

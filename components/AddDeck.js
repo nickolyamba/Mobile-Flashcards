@@ -15,12 +15,19 @@ class AddDeck extends Component {
         const {addDeck} = this.props;
         const deck = this.state.deckInput;
 
-        saveDeckTitle(deck);
-        addDeck(deck);
+        saveDeckTitle(deck).then(() => {
+            addDeck(deck);
+            ToastAndroid.showWithGravityAndOffset(`Deck ${deck} is added!`,
+                ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+        }).catch(err => {
+            ToastAndroid.showWithGravityAndOffset('Error during saving: Deck is NOT saved!',
+                ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+            console.error(err);
+        });
+
         this.setState({deckInput: ''});
 
-        ToastAndroid.showWithGravityAndOffset(`Deck ${deck} is added!`,
-            ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+
     };
 
     render() {
@@ -46,7 +53,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'flex-start',
         alignItems: 'stretch',
-        marginTop: 20
     },
     buttonText: {
         color: white,

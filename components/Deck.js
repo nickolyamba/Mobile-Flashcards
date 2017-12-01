@@ -4,8 +4,6 @@ import { purple, white } from '../utils/colors';
 import { connect } from "react-redux";
 import { resetQuiz } from "../actions/index";
 
-
-
 class Deck extends Component {
     static navigationOptions = ({ navigation }) => {
         const { title } = navigation.state.params;

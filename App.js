@@ -123,22 +123,13 @@ export default class App extends Component {
         const initState = {quiz: {cardIdx: 0, isLast: false, correctCount: 0, incorrectCount: 0}};
         const store = createStore(reducer, initState, applyMiddleware(thunk));
 
+        // initialize decks from AsyncStorage
         store.dispatch(fetchDecks());
-
-        console.log('store: ', store.getState());
 
         return (
             <Provider store={store}>
               <View style={styles.container}>
-                  <MainNavigator
-                      onNavigationStateChange={(prevState, currentState) => {
-                          const currentScreen = getCurrentRouteName(currentState);
-                          const prevScreen = getCurrentRouteName(prevState);
-
-                          //if(currentScreen === 'DeckList')
-                          console.log('currentScreen: ', currentScreen);
-                      }}
-                  />
+                  <MainNavigator />
               </View>
             </Provider>
         );
