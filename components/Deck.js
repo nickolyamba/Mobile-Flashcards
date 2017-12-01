@@ -3,6 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { purple, white, blue } from '../utils/colors';
 import { connect } from "react-redux";
 import { resetQuiz } from "../actions/index";
+import { setLocalNotification,
+    clearLocalNotification } from '../utils/notifications';
+
+resetNotification = () => {
+    clearLocalNotification()
+        .then(setLocalNotification);
+};
 
 class Deck extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -29,8 +36,9 @@ class Deck extends Component {
                 </View>
 
                 <View>
-                    <TouchableOpacity style={styles.button} onPress={() =>
-                        {resetQuiz(); navigate('Quiz', { deck })}} >
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        resetQuiz(); resetNotification; navigate('Quiz', { deck });
+                    }} >
                         <Text style={styles.buttonText}>
                             Start Quiz
                         </Text>

@@ -61,7 +61,6 @@ const addCardToDeck = async(title, card) => {
         const decks = JSON.parse(await AsyncStorage.getItem(APP_STORAGE_KEY));
         const questions = decks[title]['questions'];
         questions.push(card);
-        console.log('questions: ', questions);
 
         return await AsyncStorage.mergeItem(APP_STORAGE_KEY, JSON.stringify({
             [title]: {
