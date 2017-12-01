@@ -9,25 +9,22 @@ import { addDeck } from "../actions";
 class AddDeck extends Component {
     state = {deckInput: ''};
 
+    // Pressing the button correctly creates the deck and
+    // routes the user to the Individual Deck view for the new deck.
     createDeck = () => {
-        // Pressing the button correctly creates the deck and
-        // routes the user to the Individual Deck view for the new deck.
+        const {navigate} = this.props.navigation;
         const {addDeck} = this.props;
-        const deck = this.state.deckInput;
+        const deckTitle = this.state.deckInput;
 
-        saveDeckTitle(deck).then(() => {
-            addDeck(deck);
-            ToastAndroid.showWithGravityAndOffset(`Deck ${deck} is added!`,
-                ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+        saveDeckTitle(deckTitle).then(() => {
+            addDeck(deckTitle);
+            navigate('Deck', { title: deckTitle });
+            this.setState({deckInput: ''});
         }).catch(err => {
             ToastAndroid.showWithGravityAndOffset('Error during saving: Deck is NOT saved!',
                 ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
             console.error(err);
         });
-
-        this.setState({deckInput: ''});
-
-
     };
 
     render() {
