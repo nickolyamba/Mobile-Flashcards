@@ -17,7 +17,7 @@ import { compose } from 'redux'
 
 
 const Tab = TabNavigator({
-        Home: {
+        Decks: {
             screen: DeckList,
             navigationOptions: {
                 tabBarLabel: 'Decks',
@@ -61,7 +61,7 @@ const Tab = TabNavigator({
 );
 
 const MainNavigator = StackNavigator({
-    Home: {
+    Decks: {
         screen: Tab,
         navigationOptions: {
             header: null

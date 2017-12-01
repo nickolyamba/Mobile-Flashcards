@@ -8,14 +8,14 @@ import { resetQuiz } from "../actions/index";
 
 class Deck extends Component {
     static navigationOptions = ({ navigation }) => {
-        const { deck } = navigation.state.params;
+        const { title } = navigation.state.params;
         return {
-            title: `${deck.title}`
+            title
         }
     };
 
     render() {
-        const { deck } = this.props.navigation.state.params;
+        const { deck } = this.props;
         const { navigate } = this.props.navigation;
         const { resetQuiz } = this.props;
 
@@ -80,10 +80,17 @@ const styles = StyleSheet.create({
     }
 });
 
+const mapStateToProps = ({decks}, ownProps) => {
+    const { title } = ownProps.navigation.state.params;
+    return {
+        deck: decks ? decks[title] : {}
+    }
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         resetQuiz: () => dispatch(resetQuiz())
     }
 };
 
-export default connect(null, mapDispatchToProps)(Deck);
+export default connect(mapStateToProps, mapDispatchToProps)(Deck);
