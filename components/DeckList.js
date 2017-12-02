@@ -1,23 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
-import { white, gray, blue, lightPurp } from '../utils/colors'
+import { StyleSheet, Text, View, FlatList} from 'react-native';
+import { white, gray } from '../utils/colors'
 import { connect } from "react-redux";
 import { initDecks } from "../actions";
-
-
-const DeckItem = ({deck, navigate}) => {
-  return(
-      <TouchableOpacity style={styles.card}
-                        onPress={() => navigate('Deck', { title: deck.title })}>
-          <Text style={styles.buttonLargeText}>
-              {deck.title}
-          </Text>
-          <Text style={styles.buttonSmallText}>
-              {deck.questions ? deck.questions.length : ''} cards
-          </Text>
-      </TouchableOpacity>
-  )
-};
+import DeckItem from './DeckItem';
 
 class DeckList extends Component {
     render() {
