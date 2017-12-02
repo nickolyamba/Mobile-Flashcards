@@ -37,7 +37,7 @@ class Deck extends Component {
 
                 <View>
                     <TouchableOpacity style={styles.button} onPress={() => {
-                        resetQuiz(); resetNotification; navigate('Quiz', { deck });
+                        resetQuiz(); resetNotification(); navigate('Quiz', { deck });
                     }} >
                         <Text style={styles.buttonText}>
                             Start Quiz

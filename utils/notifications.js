@@ -26,7 +26,7 @@ export const createNotification = () => {
 };
 
 // function is taken from UdaciFitness app
-export const setLocalNotification = () => {
+export function setLocalNotification(){
     AsyncStorage.getItem(NOTIFICATION_KEY)
         .then(JSON.parse)
         .then((data) => {
@@ -54,4 +54,4 @@ export const setLocalNotification = () => {
                     })
             }
         })
-};
+}
