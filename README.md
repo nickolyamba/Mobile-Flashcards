@@ -9,7 +9,9 @@
 
 
 #### Launching:
-`$ yarn start` and use Expo Android App to run the application
+* `$ yarn start` and use Expo Android App to run the application
+
+* The application has been tested on Nexus 6P mobile device running Android 8.0.0 
 
 
 #### Specifications:
