@@ -16,6 +16,12 @@ class AddDeck extends Component {
         const {addDeck} = this.props;
         const deckTitle = this.state.deckInput;
 
+        if(!deckTitle){
+            ToastAndroid.showWithGravityAndOffset('Deck title can\'t be empty\nTry again!',
+                ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+            return;
+        }
+
         saveDeckTitle(deckTitle).then(() => {
             addDeck(deckTitle);
             navigate('Deck', { title: deckTitle });

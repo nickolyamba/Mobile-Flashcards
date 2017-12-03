@@ -15,6 +15,13 @@ class AddCard extends Component {
         const { question, answer } = this.state;
         const { addCard } = this.props;
 
+        if(!question || !answer){
+            ToastAndroid.showWithGravityAndOffset('All fields are required ' +
+                'and can\'t be empty\nTry again!',
+                ToastAndroid.LONG, ToastAndroid.CENTER, 25, 50);
+            return;
+        }
+
         addCardToDeck(deck.title, {question, answer})
             .then(() => {
                 addCard(deck.title, {question, answer});
