@@ -93,10 +93,4 @@ const mapStateToProps = ({decks}, ownProps) => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        resetQuiz: () => dispatch(resetQuiz())
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Deck);
+export default connect(mapStateToProps, {resetQuiz})(Deck);

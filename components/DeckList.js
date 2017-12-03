@@ -66,10 +66,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({decks}) => {
-    if(!Object.keys(decks))
-        return{
-            decks: []
-        };
+    if(!Object.keys(decks)) return{ decks: [] };
 
     const deckArray = Object.keys(decks).reduce((deckArray, deckKey)=>{
         if(!deckArray) deckArray = [];
@@ -82,10 +79,4 @@ const mapStateToProps = ({decks}) => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        initDecks: (decks) => dispatch(initDecks(decks)),
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
+export default connect(mapStateToProps, { initDecks })(DeckList);

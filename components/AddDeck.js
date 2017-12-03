@@ -90,10 +90,4 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addDeck: (deckTitle) => dispatch(addDeck(deckTitle)),
-    }
-};
-
-export default connect(null, mapDispatchToProps)(AddDeck);
+export default connect(null, {addDeck})(AddDeck);

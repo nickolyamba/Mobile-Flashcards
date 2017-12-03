@@ -11,7 +11,7 @@ import {addCard} from "../actions";
 class AddCard extends Component {
     state = {question: '', answer: ''};
 
-    createCard = (deck, goBack) => {
+    createCard = (deck) => {
         const { question, answer } = this.state;
         const { addCard } = this.props;
 
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'flex-start',
         alignItems: 'stretch',
-        //marginTop: 20
     },
     buttonText: {
         color: white,
@@ -106,10 +105,4 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addCard: (deckTitle, card) => dispatch(addCard(deckTitle, card))
-    }
-};
-
-export default connect(null, mapDispatchToProps)(AddCard);
+export default connect(null, {addCard})(AddCard);
